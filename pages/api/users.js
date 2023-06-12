@@ -2,7 +2,6 @@ import {createUser, getAllUsers, updateUser} from '../../controllers/user';
 
 const get = async (req, res) => {
   const users = await getAllUsers();
-  console.log(users)
   res.status(200).json({status: 'ok', users: users})
 }
 
@@ -13,10 +12,9 @@ const post = (req, res) => {
 }
 
 const put = async (req, res) => {
-  const {name, password} = req.body;
+  const {id, email, name, password} = req.body;
   if (name && password){
-    const user = await updateUser(name, password);
-    //console.log({user})
+    const user = await updateUser(id, { email, name, password });
   }
   res.status(201).json({status: 'update ok'});
 }
